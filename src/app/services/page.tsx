@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 
 // Assuming you have this interface defined elsewhere, e.g., in types.ts
 interface Service {
@@ -18,12 +18,16 @@ export default function Services() {
             try {
                 const response = await fetch('/api/services');
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
                 setServices(data);
-            } catch (e: any) {
-                setError(e.message);
+            } catch (e: unknown) {
+                if (e instanceof Error) {
+                    setError(e.message);
+                } else {
+                    setError('An unknown error occurred.');
+                }
             } finally {
                 setLoading(false);
             }
@@ -52,7 +56,8 @@ export default function Services() {
                 <div style={styles.errorCard}>
                     <h2 style={styles.errorTitle}>Oops! Something went wrong.</h2>
                     <p style={styles.errorMessage}>Error loading services: {error}</p>
-                    <p style={styles.errorHint}>Please try refreshing the page or contact support if the issue persists.</p>
+                    <p style={styles.errorHint}>Please try refreshing the page or contact support if the issue
+                        persists.</p>
                 </div>
             </div>
         );
@@ -76,7 +81,7 @@ export default function Services() {
             ) : (
                 <div style={styles.noServicesCard}>
                     <p style={styles.noServicesText}>
-                        No services found or unable to scrape. <br />
+                        No services found or unable to scrape. <br/>
                         Please ensure the target website URL and selectors in your API are correct.
                     </p>
                 </div>

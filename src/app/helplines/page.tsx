@@ -1,7 +1,6 @@
 'use client'
 import React, {useState, useEffect} from 'react';
 
-// Assuming you have this interface defined elsewhere, e.g., in types.ts
 interface Helpline {
     name: string;
     phone_number: string;
@@ -17,14 +16,16 @@ export default function Helplines() {
             try {
                 const response = await fetch('/api/helplines');
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
                 setHelplineNumbers(data);
-            } catch (e: any) {
-                // Improved error handling to safely access message
-                const errorMessage = e?.message || e?.response?.data?.error || 'An unknown error occurred.';
-                setError(errorMessage);
+            } catch (e: unknown) {
+                if (e instanceof Error) {
+                    setError(e.message);
+                } else {
+                    setError('An unknown error occurred.');
+                }
             } finally {
                 setLoading(false);
             }
@@ -33,7 +34,6 @@ export default function Helplines() {
         fetchHelplines();
     }, []);
 
-    // --- UI Improvements below ---
 
     if (loading) {
         return (
@@ -50,7 +50,7 @@ export default function Helplines() {
         return (
             <div style={styles.container}>
                 <div style={styles.errorCard}>
-                    <h2 style={styles.errorTitle}>Oops! Couldn't fetch helplines.</h2>
+                    <h2 style={styles.errorTitle}>Oops! Could not fetch helplines.</h2>
                     <p style={styles.errorMessage}>Error: {error}</p>
                     <p style={styles.errorHint}>Please ensure your internet connection is stable or try again later.</p>
                 </div>

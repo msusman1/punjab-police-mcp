@@ -1,6 +1,7 @@
 import {createMcpHandler} from "@vercel/mcp-adapter";
-import {fetchServicesOverviewFromWebsite, getHelpLineNumbers} from "@/app/libs/playwrite";
+import {fetchServicesOverviewFromWebsite} from "@/app/libs/playwrite";
 import {Helpline, Service} from "@/app/types/datatypes";
+
 const allHelplineNumbers: Helpline[] = [
     {name: 'Police Helpline', phone_number: '15'},
     {name: 'Traffic Police', phone_number: '1915'},

@@ -17,7 +17,23 @@ async function getHelpLineNumbersFromSource(): Promise<Helpline[]> {
 
 // Helper function to simulate fetching services (replace with your actual fetch)
 async function getServicesOverviewFromSource(): Promise<Service[]> {
-    return fetchServicesOverviewFromWebsite("https://pkm.punjab.gov.pk/public/home/services?id=a");
+    console.warn("Using a mock for getServicesOverviewFromSource. Playwright-based scraping is not suitable for Vercel Serverless Functions and causes timeouts.");
+    // Simulate a quick, static response instead of actual scraping
+    return [
+        {
+            title: "Character Certificate (Mock)",
+            description: "Obtain a character certificate for various purposes. (Mock Data)"
+        },
+        {
+            title: "Driving License Renewal (Mock)",
+            description: "Renew your driving license online or at designated centers. (Mock Data)"
+        },
+        {
+            title: "FIR Registration (Mock)",
+            description: "File a First Information Report for criminal offenses. (Mock Data)"
+        }
+    ];
+    // return fetchServicesOverviewFromWebsite("https://pkm.punjab.gov.pk/public/home/services?id=a");
 }
 
 const handler = createMcpHandler(

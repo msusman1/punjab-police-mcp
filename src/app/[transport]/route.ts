@@ -1,18 +1,12 @@
 import {createMcpHandler} from "@vercel/mcp-adapter";
-import {fetchServicesOverviewFromWebsite} from "@/app/libs/playwrite";
 import {Helpline, Service} from "@/app/types/datatypes";
+import {getHelpLineNumbers} from "@/app/libs/playwrite";
 
-const allHelplineNumbers: Helpline[] = [
-    {name: 'Police Helpline', phone_number: '15'},
-    {name: 'Traffic Police', phone_number: '1915'},
-    {name: 'Emergency Medical Service', phone_number: '1122'},
-    {name: 'Anti-Corruption Establishment', phone_number: '111-223-223'},
-];
 
 
 async function getHelpLineNumbersFromSource(): Promise<Helpline[]> {
 
-    return allHelplineNumbers;
+    return getHelpLineNumbers();
 }
 
 // Helper function to simulate fetching services (replace with your actual fetch)

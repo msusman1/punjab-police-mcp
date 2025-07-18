@@ -7,6 +7,7 @@ export function getHelpLineNumbers() {
         {name: 'Traffic Police', phone_number: '1915'},
         {name: 'Emergency Medical Service', phone_number: '1122'},
         {name: 'Anti-Corruption Establishment', phone_number: '111-223-223'},
+        {name: 'Fire Brigade', phone_number: '16'},
     ];
     return helplineNumbers;
 }
